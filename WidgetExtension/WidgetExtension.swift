@@ -50,22 +50,25 @@ struct SimpleEntry: TimelineEntry {
 struct WidgetExtensionEntryView: View {
   
   var entry: Provider.Entry
-  
+      
+  var body: some View {
+    VStack {
+      if let item = entry.configuration.item {
+        Text(item.text)
+      } else {
+        Text("No item")      
+      }
+    }
+  }
+}
+
+struct WidgetExtensionEntryCountView: View {
+    
   @Query var model: [SharedTypes.Item]
   
   var body: some View {
     VStack {
-      Text(entry.date, style: .time)
-
-      TimelineView(.animation()) { context in
-        Text(Date().description)
-      }
-      
-      ForEach(model) { item in
-        Text(item.timestamp, format: Date.FormatStyle(date: .numeric, time: .standard))
-      }
-            
-      Button("Run", intent: CompleteTaskIntent())
+      Text(model.count.description)      
     }
   }
 }

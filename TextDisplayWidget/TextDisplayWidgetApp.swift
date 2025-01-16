@@ -23,6 +23,10 @@ struct TextDisplayWidgetApp: App {
       fatalError("Could not create ModelContainer: \(error)")
     }
   }()
+  
+  init() {
+    
+  }
 
   var body: some Scene {
     WindowGroup {

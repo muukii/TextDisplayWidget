@@ -5,37 +5,60 @@
 //  Created by Muukii on 2025/01/15.
 //
 
+import SharedTypes
 import SwiftData
 import SwiftUI
-import SharedTypes
+import UserNotifications
 
 struct ContentView: View {
+
   @Environment(\.modelContext) private var modelContext
+
   @Query private var items: [Item]
+
+  @State var isAddingNew: Bool = false
+  @State var editingItem: Item?
 
   var body: some View {
     NavigationSplitView {
       List {
-        
-        let urls = modelContext.container.configurations.map {
-          $0.url
-        }
-        VStack {
-          Text("url")
-          Text("\(urls)")
-        }
-        
+
         ForEach(items) { item in
-          NavigationLink {
-            Text(
-              "Item at \(item.timestamp, format: Date.FormatStyle(date: .numeric, time: .standard))"
-            )
-          } label: {
-            Text(item.timestamp, format: Date.FormatStyle(date: .numeric, time: .standard))
+          Button("\(item.text)") { 
+            editingItem = item
           }
         }
         .onDelete(perform: deleteItems)
       }
+      .sheet(item: $editingItem, content: { item in
+        NavigationStack {
+          EditorView(
+            text: item.text,
+            onCancel: {
+              editingItem = nil
+            },
+            onSave: { text in
+              editingItem = nil
+              updateItem(text: text, for: item)
+            })
+        }
+      })
+      .sheet(
+        isPresented: $isAddingNew,
+        content: {
+          NavigationStack {
+            EditorView(
+              text: "",
+              onCancel: {
+                isAddingNew = false
+              },
+              onSave: { text in
+                isAddingNew = false
+                saveItem(text: text)
+              })
+          }
+        }
+      )
       .toolbar {
         ToolbarItem(placement: .navigationBarTrailing) {
           EditButton()
@@ -52,9 +75,24 @@ struct ContentView: View {
   }
 
   private func addItem() {
+    isAddingNew = true
+  }
+  
+  private func saveItem(text: String) {
     withAnimation {
-      let newItem = Item(timestamp: Date())
-      modelContext.insert(newItem)
+      try? modelContext.transaction {        
+        let newItem = Item(text: text)
+        modelContext.insert(newItem)        
+      }
+    }
+  }
+  
+  
+  private func updateItem(text: String, for item: Item) {
+    withAnimation {
+      try? modelContext.transaction {        
+        item.text = text
+      }
     }
   }
 
@@ -65,6 +103,39 @@ struct ContentView: View {
       }
     }
   }
+}
+
+struct EditorView: View {
+
+  @State var text: String
+  
+  @FocusState var isFocused
+
+  let onCancel: () -> Void
+  let onSave: (String) -> Void
+
+  var body: some View {
+
+    TextEditor(text: $text)
+      .focused($isFocused)
+      .toolbar {
+        ToolbarItem(placement: .cancellationAction) {
+          Button("Cancel") {
+            onCancel()
+          }
+        }
+        ToolbarItem(placement: .primaryAction) {
+          Button("Save") {
+            onSave(text)
+          }
+        }
+      }
+      .onAppear {
+        isFocused = true      
+      }
+
+  }
+
 }
 
 #Preview {

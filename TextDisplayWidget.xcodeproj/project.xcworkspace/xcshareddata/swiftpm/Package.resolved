@@ -1,0 +1,15 @@
+{
+  "originHash" : "8323c2cc2692549674a16bada99cf96e4cd93c461dff34c21698d5b6791da3c2",
+  "pins" : [
+    {
+      "identity" : "typedidentifier",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/VergeGroup/TypedIdentifier.git",
+      "state" : {
+        "revision" : "284340409ba47858a1b3c353dcef9c21303953db",
+        "version" : "2.0.3"
+      }
+    }
+  ],
+  "version" : 3
+}

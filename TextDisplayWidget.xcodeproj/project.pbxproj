@@ -11,6 +11,7 @@
 		4B5D72132D379A3300BF0734 /* SharedTypes.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 4B5D71FF2D379A3300BF0734 /* SharedTypes.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		4B5D721C2D379A5500BF0734 /* SharedTypes.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4B5D71FF2D379A3300BF0734 /* SharedTypes.framework */; };
 		4B5D721D2D379A5500BF0734 /* SharedTypes.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 4B5D71FF2D379A3300BF0734 /* SharedTypes.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		4B6231BC2D38A9C300459A93 /* TypedIdentifier in Frameworks */ = {isa = PBXBuildFile; productRef = 4B6231BB2D38A9C300459A93 /* TypedIdentifier */; };
 		4BD979CF2D37791400E15F9B /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4BD979CE2D37791400E15F9B /* WidgetKit.framework */; };
 		4BD979D12D37791400E15F9B /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4BD979D02D37791400E15F9B /* SwiftUI.framework */; };
 		4BD979E22D37791600E15F9B /* WidgetExtensionExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 4BD979CC2D37791400E15F9B /* WidgetExtensionExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
@@ -172,6 +173,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4B6231BC2D38A9C300459A93 /* TypedIdentifier in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -277,6 +279,7 @@
 			);
 			name = SharedTypes;
 			packageProductDependencies = (
+				4B6231BB2D38A9C300459A93 /* TypedIdentifier */,
 			);
 			productName = SharedTypes;
 			productReference = 4B5D71FF2D379A3300BF0734 /* SharedTypes.framework */;
@@ -416,6 +419,9 @@
 			);
 			mainGroup = 4BD9798D2D37781F00E15F9B;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				4B6231BA2D38A9C300459A93 /* XCRemoteSwiftPackageReference "TypedIdentifier" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 4BD979972D37781F00E15F9B /* Products */;
 			projectDirPath = "";
@@ -727,6 +733,7 @@
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 6.0;
 			};
 			name = Debug;
 		};
@@ -782,6 +789,7 @@
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_VERSION = 6.0;
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
@@ -968,6 +976,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		4B6231BA2D38A9C300459A93 /* XCRemoteSwiftPackageReference "TypedIdentifier" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/VergeGroup/TypedIdentifier.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.0.3;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		4B6231BB2D38A9C300459A93 /* TypedIdentifier */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 4B6231BA2D38A9C300459A93 /* XCRemoteSwiftPackageReference "TypedIdentifier" */;
+			productName = TypedIdentifier;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 4BD9798E2D37781F00E15F9B /* Project object */;
 }
