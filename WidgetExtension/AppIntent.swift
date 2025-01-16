@@ -16,11 +16,28 @@ struct ConfigurationAppIntent: WidgetConfigurationIntent {
   @Parameter(title: "Favorite Emoji", default: "😃")
   var favoriteEmoji: String
 
+  @Parameter(title: "Items", optionsProvider: ItemProvider())
+  var items: [String]?
 }
 
-struct ItemQuery: EntityQuery {
+private struct ItemProvider: DynamicOptionsProvider {
+  
+  typealias Result = [String]
+
+  func results() async throws -> [String] {
+    return [
+      "Item 1",
+      "Item 2",
+      "Item 3",      
+    ]
+  }
   
 }
+
+//struct ItemQuery: EntityQuery {
+//  
+//    
+//}
 
 struct CompleteTaskIntent: AppIntent {
 
